@@ -3,7 +3,6 @@ import json
 import webbrowser
 
 class FindYouErrors(Exception):
-    print ("error in foundyou.py")
     pass
 
 def getUrlJson(url):
@@ -51,7 +50,7 @@ def showLocOnMap(lon, lat):
     '''
         this funciton shows the longitude and latitude on google maps in a browser
     '''
-    url = 'https://www.google.com/maps/place/{lat},{lon}'.format(lat=lat, lon=lon)
+    url = 'https://www.google.com/maps/place/@{lat},{lon}'.format(lat=lat, lon=lon)
     webbrowser.open(url)
     return url
 
