@@ -2,8 +2,10 @@ from urllib import request as urllibReq
 import json
 import webbrowser
 
+
 class FindYouErrors(Exception):
     pass
+
 
 def getUrlJson(url):
     '''
@@ -14,6 +16,7 @@ def getUrlJson(url):
         return result
     except:
         raise
+
 
 def getMyIP():
     '''
@@ -26,13 +29,13 @@ def getMyIP():
         else:
             raise FindYouErrors("invalid ip returned")
     except:
-        print ("cannot get ip")
+        print("cannot get ip")
         raise
 
 
 def getLocationByIP(ip):
     '''
-        this function gets the location information of the ip 
+        this function gets the location information of the ip
     '''
     try:
         url = 'http://freegeoip.net/json/' + ip
@@ -42,13 +45,14 @@ def getLocationByIP(ip):
         else:
             raise FindYouErrors("invalid location info returned")
     except:
-        print ("cannot get longitude and latitude")
+        print("cannot get longitude and latitude")
         raise
 
 
 def showLocOnMap(lon, lat):
     '''
-        this funciton shows the longitude and latitude on google maps in a browser
+        this funciton shows the longitude and latitude
+        on google maps in a browser
     '''
     url = 'https://www.google.com/maps/place/@{lat},{lon}'.format(lat=lat, lon=lon)
     webbrowser.open(url)
@@ -57,16 +61,19 @@ def showLocOnMap(lon, lat):
 
 def showPlacesAround(types, lon, lat):
     '''
-        this funciton shows the types of places around the longitude and latitude on google maps in a browser
+        this funciton shows the types of places around the
+        longitude and latitude on google maps in a browser
     '''
     url = 'https://www.google.com/maps/search/{types}/@{lat},{lon}'.format(types=types, lat=lat, lon=lon)
     webbrowser.open(url)
     return url
 
+
 def main():
     '''
         this main program shows two webpages:
-            the user location and the stores around the user
+            the user location
+            the stores around the user
     '''
     try:
         ip = getMyIP()
@@ -74,7 +81,7 @@ def main():
         showLocOnMap(loc['longitude'], loc['latitude'])
         showPlacesAround("stores", loc['longitude'], loc['latitude'])
     except Exception as e:
-        print (e)
+        print(e)
 
 
 if __name__ == "__main__":
